@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+#
+# Set values specific to:
+#   salt['config.get']('os_family') == Debian.
+#
+# You just need to add the key:values for this `os_family` that differ
+# from `defaults.yaml` + `<osarch>.yaml`.
+#
+# If you do not need to provide defaults via the `os_family` config,
+# you can remove this file or provide at least an empty dict, e.g.
+# values: {}
+---
+values:
+  lookup:
+    pkg_manager: apt
+    repos:
+      stable:
+        humanname: Grafana stable
+        name: deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main
+        key_url: https://apt.grafana.com/gpg.key
+        file: /etc/apt/sources.list.d/grafana.list
+        aptkey: false
+      beta:
+        humanname: Grafana beta
+        name: deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com beta main
+        key_url: https://apt.grafana.com/gpg.key
+        file: /etc/apt/sources.list.d/grafana_beta.list
+        aptkey: false
+...

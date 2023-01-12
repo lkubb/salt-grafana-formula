@@ -1,0 +1,51 @@
+{#-
+  Make some paths absolute, if specified relative.
+  Relative paths would usually be relative to the WORKING_DIR,
+  but those make more sense to put into the config dir by default
+  and are also used to manage files by this formula.
+-#}
+
+{%- set config_dir = mapdata.lookup.paths.conf -%}
+{%- for conf in ["config:server:cert_file", "config:server:cert_key"] -%}
+  {%- set val = mapdata | traverse(conf) %}
+  {%- if val and not val.startswith("/") -%}
+    {%- do mapdata | set_dict_key_value(conf, config_dir | path_join(val)) %}
+  {%- endif -%}
+{%- endfor -%}
+
+
+{#-
+    Automatically generate secrets if they were not specified.
+-#}
+
+{%- set current_cached = {} -%}
+{%- set cache_updated = [] -%}
+{%- set cache_file = config_dir | path_join(".saltcache.yml") -%}
+{%- if salt["file.file_exists"](cache_file) -%}
+  {%- do current_cached.update(salt["jinja.import_yaml"](cache_file)) -%}
+{%- elif not opts["test"] -%}
+  {%- do salt["file.mkdir"](config_dir) -%}
+{%- endif -%}
+
+{%- for var, val in current_cached.items() -%}
+  {%- do mapdata | set_dict_key_value(var, val) -%}
+{%- endfor -%}
+
+{%- for secret, length, enabled in [
+      ("config:security:secret_key", 64, mapdata | traverse("config:security:encryption_provider", "secretKey.v1") == "secretKey.v1"),
+    ] -%}
+  {%- if enabled and not mapdata | traverse(secret) -%}
+    {%- do current_cached.update({secret: salt["random.get_str"](length, punctuation=false)}) -%}
+    {%- do cache_updated.append(true) -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if cache_updated -%}
+  {%- for var, val in current_cached.items() -%}
+    {%- do mapdata | set_dict_key_value(var, val) -%}
+  {%- endfor -%}
+  {%- if not opts["test"] %}
+    {%- do salt["file.write"](cache_file, salt["slsutil.serialize"]("yaml", current_cached)) -%}
+    {%- do salt["file.set_mode"](cache_file, "0600") -%}
+  {%- endif %}
+{%- endif -%}

@@ -1,0 +1,31 @@
+{%- macro render_opt(name, val) %}
+{%-   if val is boolean %}
+{%-     set rendered = val | string | lower %}
+{%-   elif val | is_list %}
+{%-     set rendered = val | join(',') %}
+{%-   else %}
+{%-     set rendered = val | string %}
+{%-   endif %}
+{{- name }} = {{ rendered }}
+{%- endmacro -%}
+
+;; This file is managed by Salt.
+;; Manual changes might be overwritten.
+
+{% for name, val in grafana.config | dictsort %}
+{%-   if val is mapping %}
+{%-     continue %}
+{%-   endif %}
+{{ render_opt(name, val) }}
+{%- endfor %}
+
+{%- for topic, vals in grafana.config | dictsort %}
+{%-   if vals is not mapping %}
+{%-     continue %}
+{%-   endif %}
+
+[{{ topic | lower }}]
+{%-   for name, val in vals | dictsort %}
+{{ render_opt(name, val) }}
+{%-   endfor %}
+{%- endfor %}

@@ -1,0 +1,61 @@
+# yamllint disable rule:indentation rule:line-length
+# CentOS Linux-7
+---
+values:
+  added_in_defaults: defaults_value
+  added_in_lookup: lookup_value
+  added_in_pillar: pillar_value
+  lookup:
+    arch: amd64
+    rootgroup: root
+    enablerepo:
+      stable: true
+    config: '/etc/grafana/grafana.ini'
+    service:
+      name: grafana-server
+    group: grafana
+    paths:
+      conf: /etc/grafana
+      data: /var/lib/grafana
+      home: /usr/share/grafana
+      log: /var/log/grafana
+      plugins: /var/lib/grafana/plugins
+      provisioning: /etc/grafana/provisioning
+      run: /run/grafana
+    user: grafana
+  cert:
+    ca_server: null
+    cn: null
+    intermediate: []
+    signing_cert: null
+    signing_policy: null
+    signing_private_key: null
+  config:
+    analytics:
+      reporting_enabled: false
+    security:
+      secret_key: null
+    users:
+      allow_sign_up: false
+  version: null
+  map_jinja:
+    sources:
+    - Y:G@osarch
+    - Y:G@os_family
+    - Y:G@os
+    - Y:G@osfinger
+    - C@grafana
+    - Y:G@id
+  master: template-master
+  tofs:
+    files_switch:
+    - any/path/can/be/used/here
+    - id
+    - roles
+    - osfinger
+    - os
+    - os_family
+    source_files:
+      grafana-config-file-file-managed:
+      - example.tmpl.jinja
+  winner: pillar

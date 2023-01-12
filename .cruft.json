@@ -1,0 +1,67 @@
+{
+  "template": "https://github.com/lkubb/salt-template-formula",
+  "commit": "9ca35064e6d6ca808ce67fde9080fd2be77dd08c",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "_extensions": [
+        "local_extensions.YAMLDumper"
+      ],
+      "_jinja2_env_vars": {
+        "block_start_string": "{!",
+        "block_end_string": "!}",
+        "variable_start_string": "{=",
+        "variable_end_string": "=}",
+        "comment_start_string": "{@",
+        "comment_end_string": "@}"
+      },
+      "name": "Grafana",
+      "abbr": "grafana",
+      "abbr_pysafe": "grafana",
+      "pkg": "grafana",
+      "needs_repo": "y",
+      "config": "/etc/grafana/grafana.ini",
+      "service": "grafana-server",
+      "subcomponent": "",
+      "subcomponent_config": "",
+      "git_username": "lkubb",
+      "_lookup": {
+        "group": "grafana",
+        "user": "grafana",
+        "paths": {
+          "conf": "/etc/grafana",
+          "data": "/var/lib/grafana",
+          "home": "/usr/share/grafana",
+          "log": "/var/log/grafana",
+          "plugins": "/var/lib/grafana/plugins",
+          "provisioning": "/etc/grafana/provisioning",
+          "run": "/run/grafana"
+        }
+      },
+      "_settings": {
+        "cert": {
+          "ca_server": null,
+          "cn": null,
+          "intermediate": [],
+          "signing_policy": null,
+          "signing_private_key": null,
+          "signing_cert": null
+        },
+        "config": {
+          "analytics": {
+            "reporting_enabled": false
+          },
+          "security": {
+            "secret_key": null
+          },
+          "users": {
+            "allow_sign_up": false
+          }
+        },
+        "version": null
+      },
+      "_template": "https://github.com/lkubb/salt-template-formula"
+    }
+  },
+  "directory": null
+}
