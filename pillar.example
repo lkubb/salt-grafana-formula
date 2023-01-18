@@ -26,6 +26,10 @@ grafana:
       secret_key: null
     users:
       allow_sign_up: false
+    # A mapping of secret name to value. By default, those are
+    # passed as environment variables. You can then make use of
+    # them in provisioning files.
+  secrets: {}
     # Set this to latest to enable automatic updates.
   version: null
 
@@ -34,11 +38,13 @@ grafana:
     paths:
       conf: /etc/grafana
       data: /var/lib/grafana
+      env_file: /etc/grafana/grafana.env
       home: /usr/share/grafana
       log: /var/log/grafana
       plugins: /var/lib/grafana/plugins
       provisioning: /etc/grafana/provisioning
       run: /run/grafana
+      unit_file: /etc/systemd/system/grafana-server.service
     user: grafana
 
   tofs:

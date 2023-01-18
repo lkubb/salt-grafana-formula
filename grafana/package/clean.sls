@@ -9,7 +9,11 @@ include:
   - {{ sls_config_clean }}
   - {{ slsdotpath }}.repo.clean
 
-grafana-package-clean-pkg-removed:
+Grafana service unit overrides are absent:
+  file.absent:
+    - name: {{ grafana.lookup.paths.unit_file }}
+
+Grafana is removed:
   pkg.removed:
     - name: {{ grafana.lookup.pkg.name }}
     - require:

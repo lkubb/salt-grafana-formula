@@ -12,6 +12,7 @@ grafana-config-clean-file-absent:
   file.absent:
     - names:
       - {{ grafana.lookup.config }}
+      - {{ grafana.lookup.paths.env_file }}
       - {{ grafana.lookup.paths.provisioning }}
       - {{ grafana.lookup.paths.conf | path_join(".saltcache.yml") }}
     - require:

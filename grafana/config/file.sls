@@ -26,6 +26,24 @@ Grafana configuration is managed:
     - context:
         grafana: {{ grafana | json }}
 
+Grafana secrets are managed:
+  file.managed:
+    - name: {{ grafana.lookup.paths.env_file }}
+    - source: {{ files_switch(['grafana.env', 'grafana.env.j2'],
+                              lookup='Grafana secrets are managed'
+                 )
+              }}
+    - mode: '0600'
+    - user: root
+    - group: {{ grafana.lookup.rootgroup }}
+    - makedirs: True
+    - template: jinja
+    - show_changes: false
+    - require:
+      - sls: {{ sls_package_install }}
+    - context:
+        grafana: {{ grafana | json }}
+
 Grafana provisioning configuration is managed:
   file.recurse:
     - name: {{ grafana.lookup.paths.provisioning }}

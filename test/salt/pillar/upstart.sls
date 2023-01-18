@@ -16,11 +16,13 @@ grafana:
     paths:
       conf: /etc/grafana
       data: /var/lib/grafana
+      env_file: /etc/grafana/grafana.env
       home: /usr/share/grafana
       log: /var/log/grafana
       plugins: /var/lib/grafana/plugins
       provisioning: /etc/grafana/provisioning
       run: /run/grafana
+      unit_file: /etc/systemd/system/grafana-server.service
     user: grafana
   cert:
     ca_server: null
@@ -36,6 +38,7 @@ grafana:
       secret_key: null
     users:
       allow_sign_up: false
+  secrets: {}
   version: null
 
   tofs:
