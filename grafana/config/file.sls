@@ -57,7 +57,8 @@ Grafana provisioning configuration is managed:
     - group: {{ grafana.lookup.group }}
     - clean: true
     - exclude_pat:
-      - '\.gitkeep'
+      - '*/.gitkeep'
+    - include_empty: true
     - template: jinja
     - require:
       - sls: {{ sls_package_install }}
