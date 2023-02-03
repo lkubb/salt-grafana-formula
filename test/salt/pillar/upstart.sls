@@ -7,6 +7,8 @@ grafana:
     # Just for testing purposes
     winner: lookup
     added_in_lookup: lookup_value
+    pkg:
+      name: grafana
     enablerepo:
       stable: true
     config: '/etc/grafana/grafana.ini'

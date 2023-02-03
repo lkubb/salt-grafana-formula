@@ -8,6 +8,8 @@ values:
   lookup:
     arch: amd64
     rootgroup: root
+    pkg:
+      name: grafana
     enablerepo:
       stable: true
     config: '/etc/grafana/grafana.ini'
