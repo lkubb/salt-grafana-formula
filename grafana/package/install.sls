@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
+{%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as grafana with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
@@ -32,10 +31,3 @@ Grafana service unit overrides are installed:
       - Grafana is installed
     - context:
         grafana: {{ grafana | json }}
-{%- if "systemctl" | which %}
-  # this executes systemctl daemon-reload
-  module.run:
-    - systemctl_service.systemctl_reload: []
-    - onchanges:
-      - file: {{ grafana.lookup.paths.unit_file }}
-{%- endif %}

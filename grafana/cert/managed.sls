@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
-{%- set sls_config_file = tplroot ~ '.config.file' %}
+{%- set tplroot = tpldir.split("/")[0] %}
+{%- set sls_config_file = tplroot ~ ".config.file" %}
 {%- from tplroot ~ "/map.jinja" import mapdata as grafana with context %}
 
 include:
@@ -32,7 +31,8 @@ Grafana HTTP certificate is managed:
     - ca_server: {{ grafana.cert.ca_server or "null" }}
     - signing_policy: {{ grafana.cert.signing_policy or "null" }}
     - signing_cert: {{ grafana.cert.signing_cert or "null" }}
-    - signing_private_key: {{ grafana.cert.signing_private_key or (grafana.config.server.cert_file if not grafana.cert.ca_server and not grafana.cert.signing_cert else "null") }}
+    - signing_private_key: {{ grafana.cert.signing_private_key or
+                              (grafana.config.server.cert_file if not grafana.cert.ca_server and not grafana.cert.signing_cert else "null") }}
     - private_key: {{ grafana.config.server.cert_key }}
     - authorityKeyIdentifier: keyid:always
     - basicConstraints: critical, CA:false

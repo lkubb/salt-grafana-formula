@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # vim: ft=yaml
 #
 # Set values specific to:
@@ -17,13 +16,17 @@ values:
     repos:
       stable:
         humanname: Grafana stable
-        name: deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com stable main
+        name: >-
+          deb [signed-by=/usr/share/keyrings/grafana.key]
+          https://apt.grafana.com stable main
         key_url: https://apt.grafana.com/gpg.key
         file: /etc/apt/sources.list.d/grafana.list
         aptkey: false
       beta:
         humanname: Grafana beta
-        name: deb [signed-by=/usr/share/keyrings/grafana.key] https://apt.grafana.com beta main
+        name: >-
+          deb [signed-by=/usr/share/keyrings/grafana.key]
+          https://apt.grafana.com beta main
         key_url: https://apt.grafana.com/gpg.key
         file: /etc/apt/sources.list.d/grafana_beta.list
         aptkey: false

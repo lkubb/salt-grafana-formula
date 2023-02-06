@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
-{%- set sls_package_install = tplroot ~ '.package.install' %}
+{%- set tplroot = tpldir.split("/")[0] %}
+{%- set sls_package_install = tplroot ~ ".package.install" %}
 {%- from tplroot ~ "/map.jinja" import mapdata as grafana with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
@@ -12,14 +11,14 @@ include:
 Grafana configuration is managed:
   file.managed:
     - name: {{ grafana.lookup.config }}
-    - source: {{ files_switch(['grafana.ini', 'grafana.ini.j2'],
-                              lookup='Grafana configuration is managed'
+    - source: {{ files_switch(["grafana.ini", "grafana.ini.j2"],
+                              lookup="Grafana configuration is managed"
                  )
               }}
     - mode: '0640'
     - user: root
     - group: {{ grafana.lookup.group }}
-    - makedirs: True
+    - makedirs: true
     - template: jinja
     - require:
       - sls: {{ sls_package_install }}
@@ -29,14 +28,14 @@ Grafana configuration is managed:
 Grafana secrets are managed:
   file.managed:
     - name: {{ grafana.lookup.paths.env_file }}
-    - source: {{ files_switch(['grafana.env', 'grafana.env.j2'],
-                              lookup='Grafana secrets are managed'
+    - source: {{ files_switch(["grafana.env", "grafana.env.j2"],
+                              lookup="Grafana secrets are managed"
                  )
               }}
     - mode: '0600'
     - user: root
     - group: {{ grafana.lookup.rootgroup }}
-    - makedirs: True
+    - makedirs: true
     - template: jinja
     - show_changes: false
     - require:
@@ -47,8 +46,8 @@ Grafana secrets are managed:
 Grafana provisioning configuration is managed:
   file.recurse:
     - name: {{ grafana.lookup.paths.provisioning }}
-    - source: {{ files_switch(['provisioning'],
-                              lookup='Grafana provisioning configuration is managed'
+    - source: {{ files_switch(["provisioning"],
+                              lookup="Grafana provisioning configuration is managed"
                  )
               }}
     - file_mode: '0640'

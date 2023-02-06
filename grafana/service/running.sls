@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
-{%- set sls_config_file = tplroot ~ '.config.file' %}
-{%- set sls_cert_managed = tplroot ~ '.cert.managed' %}
+{%- set tplroot = tpldir.split("/")[0] %}
+{%- set sls_config_file = tplroot ~ ".config.file" %}
+{%- set sls_cert_managed = tplroot ~ ".cert.managed" %}
 {%- from tplroot ~ "/map.jinja" import mapdata as grafana with context %}
 
 include:
@@ -13,7 +12,7 @@ include:
 Grafana is running:
   service.running:
     - name: {{ grafana.lookup.service.name }}
-    - enable: True
+    - enable: true
     - watch:
       - sls: {{ sls_config_file }}
 {%- if grafana.config | traverse("server:cert_key") and grafana.config | traverse("server:cert_file") %}
