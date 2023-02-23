@@ -45,6 +45,8 @@ Grafana HTTP certificate is managed:
     - group: {{ grafana.lookup.group }}
     - makedirs: True
     - append_certs: {{ grafana.cert.intermediate | json }}
+    - days_remaining: {{ grafana.cert.days_remaining }}
+    - days_valid: {{ grafana.cert.days_valid }}
     - require:
       - sls: {{ sls_config_file }}
 {%-   if not salt["file.file_exists"](grafana.config.server.cert_key) %}

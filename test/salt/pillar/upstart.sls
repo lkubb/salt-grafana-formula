@@ -28,6 +28,8 @@ grafana:
   cert:
     ca_server: null
     cn: null
+    days_remaining: 7
+    days_valid: 30
     intermediate: []
     signing_cert: null
     signing_policy: null
