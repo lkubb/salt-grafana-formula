@@ -25,8 +25,46 @@
       "subcomponent": "",
       "subcomponent_config": "",
       "git_username": "lkubb",
-      "lookup": {},
-      "settings": {},
+      "lookup": {
+        "group": "grafana",
+        "user": "grafana",
+        "paths": {
+          "conf": "/etc/grafana",
+          "data": "/var/lib/grafana",
+          "env_file": "/etc/grafana/grafana.env",
+          "home": "/usr/share/grafana",
+          "log": "/var/log/grafana",
+          "plugins": "/var/lib/grafana/plugins",
+          "provisioning": "/etc/grafana/provisioning",
+          "run": "/run/grafana",
+          "unit_file": "/etc/systemd/system/grafana-server.service"
+        }
+      },
+      "settings": {
+        "cert": {
+          "ca_server": null,
+          "cn": null,
+          "intermediate": [],
+          "signing_policy": null,
+          "signing_private_key": null,
+          "signing_cert": null,
+          "days_remaining": 7,
+          "days_valid": 30
+        },
+        "config": {
+          "analytics": {
+            "reporting_enabled": false
+          },
+          "security": {
+            "secret_key": null
+          },
+          "users": {
+            "allow_sign_up": false
+          }
+        },
+        "secrets": {},
+        "version": null
+      },
       "_template": "https://github.com/lkubb/salt-template-formula"
     }
   },
