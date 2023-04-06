@@ -43,7 +43,7 @@ Has a dependency on `grafana.package`_.
 ``grafana.service``
 ^^^^^^^^^^^^^^^^^^^
 Starts the grafana service and enables it at boot time.
-Has a dependency on `grafana.config`_ and grafana.cert`_.
+Has a dependency on `grafana.config`_ and `grafana.cert`_.
 
 
 ``grafana.cert``

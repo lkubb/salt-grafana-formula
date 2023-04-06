@@ -11,6 +11,7 @@ extends: 'default'
 # 5. Any SLS files under directory `test/`, which are actually state files
 # 6. Any YAML files under directory `.kitchen/`, introduced during local testing
 # 7. `kitchen.vagrant.yml`, which contains Embedded Ruby (ERB) template syntax
+# 8. Templated yml files that will be `file.recurse`d (and hence need the .yml ext)
 ignore: |
   .bundle/
   .cache/
@@ -19,6 +20,7 @@ ignore: |
   test/**/states/**/*.sls
   .kitchen/
   kitchen.vagrant.yml
+  grafana/files/default/provisioning/
 
 yaml-files:
   # Default settings

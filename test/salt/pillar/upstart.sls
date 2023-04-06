@@ -16,6 +16,7 @@ grafana:
     group: grafana
     paths:
       conf: /etc/grafana
+      dashboards: /etc/grafana/dashboards
       data: /var/lib/grafana
       env_file: /etc/grafana/grafana.env
       home: /usr/share/grafana

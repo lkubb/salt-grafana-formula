@@ -63,3 +63,22 @@ Grafana provisioning configuration is managed:
       - sls: {{ sls_package_install }}
     - context:
         grafana: {{ grafana | json }}
+
+
+Grafana dashboards are managed:
+  file.recurse:
+    - name: {{ grafana.lookup.paths.dashboards }}
+    - source: {{ files_switch(["dashboards"],
+                              lookup="Grafana dashboards are managed"
+                 )
+              }}
+    - file_mode: '0644'
+    - dir_mode: '0755'
+    - user: root
+    - group: {{ grafana.lookup.group }}
+    - clean: true
+    - exclude_pat:
+      - '*/.gitkeep'
+    - include_empty: true
+    - require:
+      - sls: {{ sls_package_install }}
