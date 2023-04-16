@@ -17,7 +17,7 @@ Grafana {{ reponame }} repository is available:
     - enabled: 1
 {%-     endif %}
     - require_in:
-      - grafana-package-install-pkg-installed
+      - Grafana is installed
 
 {%-   else %}
 
@@ -29,6 +29,6 @@ Grafana {{ reponame }} repository is disabled:
 {%-       endif %}
 {%-     endfor %}
     - require_in:
-      - grafana-package-install-pkg-installed
+      - Grafana is installed
 {%-   endif %}
 {%- endfor %}
