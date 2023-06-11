@@ -2,7 +2,7 @@
 
 {#-
     Removes the Grafana and the service unit overrides.
-    Has a depency on `grafana.config.clean`_.
+    Has a dependency on `grafana.config.clean`_.
 #}
 
 {%- set tplroot = tpldir.split("/")[0] %}

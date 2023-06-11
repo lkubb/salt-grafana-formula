@@ -3,7 +3,7 @@
 {%- set tplroot = tpldir.split("/")[0] %}
 {%- set sls_package_install = tplroot ~ ".package.install" %}
 {%- from tplroot ~ "/map.jinja" import mapdata as grafana with context %}
-{%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
+{%- from tplroot ~ "/libtofsstack.jinja" import files_switch with context %}
 
 include:
   - {{ sls_package_install }}
@@ -11,8 +11,10 @@ include:
 Grafana configuration is managed:
   file.managed:
     - name: {{ grafana.lookup.config }}
-    - source: {{ files_switch(["grafana.ini", "grafana.ini.j2"],
-                              lookup="Grafana configuration is managed"
+    - source: {{ files_switch(
+                    ["grafana.ini", "grafana.ini.j2"],
+                    config=grafana,
+                    lookup="Grafana configuration is managed",
                  )
               }}
     - mode: '0640'
@@ -25,11 +27,15 @@ Grafana configuration is managed:
     - context:
         grafana: {{ grafana | json }}
 
+# TODO: LoadCredential
+# https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Credentials
 Grafana secrets are managed:
   file.managed:
     - name: {{ grafana.lookup.paths.env_file }}
-    - source: {{ files_switch(["grafana.env", "grafana.env.j2"],
-                              lookup="Grafana secrets are managed"
+    - source: {{ files_switch(
+                    ["grafana.env", "grafana.env.j2"],
+                    config=grafana,
+                    lookup="Grafana secrets are managed",
                  )
               }}
     - mode: '0600'
@@ -46,8 +52,10 @@ Grafana secrets are managed:
 Grafana provisioning configuration is managed:
   file.recurse:
     - name: {{ grafana.lookup.paths.provisioning }}
-    - source: {{ files_switch(["provisioning"],
-                              lookup="Grafana provisioning configuration is managed"
+    - source: {{ files_switch(
+                    ["provisioning"],
+                    config=grafana,
+                    lookup="Grafana provisioning configuration is managed",
                  )
               }}
     - file_mode: '0640'
@@ -68,8 +76,10 @@ Grafana provisioning configuration is managed:
 Grafana dashboards are managed:
   file.recurse:
     - name: {{ grafana.lookup.paths.dashboards }}
-    - source: {{ files_switch(["dashboards"],
-                              lookup="Grafana dashboards are managed"
+    - source: {{ files_switch(
+                    ["dashboards"],
+                    config=grafana,
+                    lookup="Grafana dashboards are managed",
                  )
               }}
     - file_mode: '0644'
