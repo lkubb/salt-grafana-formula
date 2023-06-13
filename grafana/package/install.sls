@@ -2,7 +2,7 @@
 
 {%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as grafana with context %}
-{%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
+{%- from tplroot ~ "/libtofsstack.jinja" import files_switch with context %}
 
 include:
   - {{ slsdotpath }}.repo
@@ -18,8 +18,10 @@ Grafana is installed:
 Grafana service unit overrides are installed:
   file.managed:
     - name: {{ grafana.lookup.paths.unit_file }}
-    - source: {{ files_switch(["grafana-server.service", "grafana-server.service.j2"],
-                              lookup="Grafana service unit overrides are installed"
+    - source: {{ files_switch(
+                    ["grafana-server.service", "grafana-server.service.j2"],
+                    config=grafana,
+                    lookup="Grafana service unit overrides are installed",
                  )
               }}
     - user: root
