@@ -19,7 +19,7 @@ Grafana HTTP certificate private key is managed:
     - prereq:
       - Grafana HTTP certificate is managed
 {%-   endif %}
-    - makedirs: True
+    - makedirs: true
     - user: {{ grafana.lookup.user }}
     - group: {{ grafana.lookup.group }}
     - require:
@@ -43,7 +43,7 @@ Grafana HTTP certificate is managed:
     - mode: '0640'
     - user: {{ grafana.lookup.user }}
     - group: {{ grafana.lookup.group }}
-    - makedirs: True
+    - makedirs: true
     - append_certs: {{ grafana.cert.intermediate | json }}
     - days_remaining: {{ grafana.cert.days_remaining }}
     - days_valid: {{ grafana.cert.days_valid }}
