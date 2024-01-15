@@ -19,7 +19,7 @@ Grafana is running:
       - sls: {{ sls_cert_managed }}
 {%- endif %}
 
-{%- if grains["os_family"] == "RedHat" %}
+{%- if grafana.manage_firewalld and "firewall-cmd" | which %}
 
 Grafana service is known:
   firewalld.service:

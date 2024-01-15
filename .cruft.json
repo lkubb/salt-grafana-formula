@@ -63,6 +63,7 @@
             "allow_sign_up": false
           }
         },
+        "manage_firewalld": false,
         "secrets": {},
         "version": null
       },

@@ -27,6 +27,8 @@ grafana:
       secret_key: null
     users:
       allow_sign_up: false
+    # Manage firewalld when it's available
+  manage_firewalld: false
     # A mapping of secret name to value. By default, those are
     # passed as environment variables. You can then make use of
     # them in provisioning files.

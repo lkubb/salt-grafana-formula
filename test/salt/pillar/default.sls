@@ -42,6 +42,7 @@ grafana:
       secret_key: null
     users:
       allow_sign_up: false
+  manage_firewalld: false
   secrets: {}
   version: null
 
